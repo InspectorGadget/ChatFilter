@@ -12,6 +12,8 @@ use pocketmine\utils\Config;
 /* Execution */
 use pocketmine\command\CommandExecutor;
 
+use RTG\ChatFilter\CMD\FilterCommand;
+
 class Loader extends PluginBase implements Listener {
 	
 	public $whitelist;
@@ -27,20 +29,20 @@ class Loader extends PluginBase implements Listener {
 		$this->whitelist = array();
 		
 		@mkdir ($this->getDataFolder());
-		$list = new Config($this->getDataFolder() . "bannednames.yml", Config::YAML);
+		$list = new Config($this->getDataFolder() . "bannednames.txt", Config::ENUM);
 		$this->whitelist = $list->getAll(true);
 		
 		$this->getLogger()->info("[LEET] ChatFilter has been enabled!");
 	}
 	
 	public function onSave() {
-		$list = new Config($this->getDataFolder() . "bannednames.yml", Config::YAML);
+		$list = new Config($this->getDataFolder() . "bannednames.txt", Config::ENUM);
 		$list->setAll($this->whitelist);
-		$list->save():
+		$list->save();
 	}
 	
 	public function onDisable() {
-		
+		$this->onSave();
 	}
 	
 }
