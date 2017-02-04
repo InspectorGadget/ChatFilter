@@ -14,6 +14,8 @@ use pocketmine\command\CommandExecutor;
 
 use RTG\ChatFilter\CMD\FilterCommand;
 
+use pocketmine\event\player\PlayerChatEvent;
+
 class Loader extends PluginBase implements Listener {
 	
 	public $whitelist;
@@ -40,7 +42,21 @@ class Loader extends PluginBase implements Listener {
 		$list->setAll($this->whitelist);
 		$list->save();
 	}
-	
+        
+        public function onChat(PlayerChatEvent $e) {
+            
+            $p = $e->getPlayer();
+            $msg = $e->getMessage();
+            $list = new Config($this->getDataFolder() . "bannednames.txt", Config::ENUM);
+            $get = $list->getAll(true);
+                
+                if(strpos($get, $msg) === true) {
+                    $sender->sendMessage("[ChatFilter] Triggered!");
+                    $e->setCancelled();
+                }
+                
+        }
+        
 	public function onDisable() {
 		$this->onSave();
 	}

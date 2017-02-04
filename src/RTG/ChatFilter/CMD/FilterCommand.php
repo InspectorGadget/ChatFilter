@@ -25,7 +25,7 @@ class FilterCommand implements CommandExecutor {
 	public function onCommand(CommandSender $sender, Command $cmd, $label, array $param) {
 		switch(strtolower($cmd->getName())) {
 			
-			case "cf":
+                            case "cf":
 			
 				if($sender->hasPermission("chatfilter.command")) {
 					
@@ -37,6 +37,7 @@ class FilterCommand implements CommandExecutor {
 							
 								$sender->sendMessage("[ChatFilter] /cf add [name]");
 								$sender->sendMessage("[ChatFilter] /cf rm [name]");
+                                                                $sender->sendMessage("[ChatFilter] /cf help");
 							
 								return true;
 							break;
@@ -67,6 +68,39 @@ class FilterCommand implements CommandExecutor {
 							
 								return true;
 							break;
+                                                        
+                                                        case "rm":
+                                                            
+                                                            if(isset($param[1])) {
+                                                                
+                                                                $n = $param[1];
+                                                                
+                                                                    if(isset($this->plugin->whitelist[strtolower($n)])) {
+                                                                        unset($this->plugin->whitelist[strtolower($n)]);
+                                                                        $sender->sendMessage("[ChatFilter] You have removed $n from the list!");
+                                                                        $this->plugin->onSave();
+                                                                    }
+                                                                    else {
+                                                                        $sender->sendMessage("[ChatFilter] The word $n doesn't exist in the List!");  
+                                                                    }
+                                                                  
+                                                            }
+                                                            else {
+                                                                $sender->sendMessage("[ChatFilter] /cf help");
+                                                            }
+                                                            
+                                                            return true;
+                                                        break;
+                                                        
+                                                        case "list":
+                                                            
+                                                            $list = new Config($this->plugin->getDataFolder() . "bannednames.txt", Config::ENUM);
+                                                            $l = $list->getAll(true);
+                                                            $im = implode(", ", $l);
+                                                            $sender->sendMessage($im);
+                                                            
+                                                            return true;
+                                                        break;
 								
 						}
 							
@@ -81,7 +115,7 @@ class FilterCommand implements CommandExecutor {
 				}
 			
 				return true;
-			break;
+                            break;
 			
 		}
 		
