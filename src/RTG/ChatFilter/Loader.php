@@ -32,7 +32,7 @@ class Loader extends PluginBase implements Listener {
 		
 		@mkdir ($this->getDataFolder());
 		$list = new Config($this->getDataFolder() . "bannednames.txt", Config::ENUM);
-		$this->whitelist = $list->getAll(true);
+		$this->whitelist = explode(", ", $list->getAll());
 		
 		$this->getLogger()->info("[LEET] ChatFilter has been enabled!");
 	}
@@ -48,15 +48,20 @@ class Loader extends PluginBase implements Listener {
             $p = $e->getPlayer();
             $msg = $e->getMessage();
             $list = new Config($this->getDataFolder() . "bannednames.txt", Config::ENUM);
-            $get = $list->getAll(true);
+            $get = $list->getAll();
                 
-                if(strpos($get, $msg) === true) {
-                    $sender->sendMessage("[ChatFilter] Triggered!");
-                    $e->setCancelled();
+                if(strpos(strtolower($msg, $get) !== FALSE)) {
+                    $p->sendMessage("[ChatFilter] Triggered!");
+                    $e->setCancelled(true);
                 }
                 
         }
         
+        
+        public function getList() {
+            return $this->whitelist;
+        }
+ 
 	public function onDisable() {
 		$this->onSave();
 	}
