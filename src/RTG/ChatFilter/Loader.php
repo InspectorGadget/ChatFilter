@@ -42,7 +42,7 @@ class Loader extends PluginBase implements Listener {
         $this->words = array();
         $this->cfg = new Config($this->getDataFolder() . "words.txt", Config::ENUM);
         
-        $this->word = $this->cfg->getAll(true); // This line PMMP Forums!
+        $this->words = $this->cfg->getAll(true); // This line PMMP Forums!
     }
     
     public function onSave() {
@@ -95,9 +95,9 @@ class Loader extends PluginBase implements Listener {
                                     
                                     $word = $args[1];
                                     
-                                    if(isset($this->word[strtolower($word)])) {
+                                    if(isset($this->words[strtolower($word)])) {
                                         
-                                        unset($this->word[strtolower($word)]);
+                                        unset($this->words[strtolower($word)]);
                                         $sender->sendMessage("[ChatFilter] $word has been removed!");
                                         
                                     }
