@@ -135,11 +135,14 @@ class Loader extends PluginBase implements Listener {
         $this->cfg = new Config($this->getDataFolder() . "words.txt", Config::ENUM);
 
         foreach ($this->cfg->getAll(true) as $banned) {
+            
+            $find = strpos($msg, $banned);
 
-            if ($msg === $banned) {
+            if($find !== false) {
 
-                $p->sendMessage("[ChatFilter] Word blocked!");
+                $p->sendMessage(TF::RED . "[ChatFilter] Word blocked!");
                 $e->setCancelled();
+                
             }
         }
     }
