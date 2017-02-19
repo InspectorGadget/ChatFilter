@@ -36,7 +36,7 @@ class Loader extends PluginBase implements Listener {
     public $cfg;
 
     public function onEnable() {
-        $this->getServer()->getPluginManager()->registerEvents($this, $this)
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->cfg = new Config($this->getDataFolder() . "words.txt", Config::ENUM);
     }
 
