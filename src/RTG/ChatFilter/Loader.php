@@ -24,8 +24,6 @@ namespace RTG\ChatFilter;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use pocketmine\Server;
-use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\command\CommandSender;
@@ -33,14 +31,30 @@ use pocketmine\command\Command;
 use pocketmine\event\player\PlayerChatEvent;
 
 class Loader extends PluginBase implements Listener {
+
     public $cfg;
+    const prefix = '[ChatFilter]';
 
     public function onEnable() {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->cfg = new Config($this->getDataFolder() . "words.txt", Config::ENUM);
+        if (!is_dir($this->getDataFolder())) {
+            if (!is_file($this->getDataFolder() . "words.txt")) {
+                $this->cfg = new Config($this->getDataFolder() . "words.txt", Config::ENUM);
+            }
+        } else {
+            $this->getLogger()->warning(self::prefix . " Folder Loaded!");
+        }
     }
 
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
+    /**
+     * @param CommandSender $sender
+     * @param Command $command
+     * @param string $commandLabel
+     * @param array $args
+     * @return bool
+     */
+    public function onCommand(CommandSender $sender, Command $command, string $commandLabel, array $args): bool
+    {
         switch (strtolower($command->getName())) {
             case "cf":
                 if ($sender->hasPermission("chatfilter.command") or $sender->isOp()) {

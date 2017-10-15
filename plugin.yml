@@ -1,12 +1,14 @@
 name: ChatFilter
 version: 1.0.0
 main: RTG\ChatFilter\Loader
-api: 2.1.0
+api: ["3.0.0-ALPHA8", "3.0.0-ALPHA9"]
 author: IG
 
 commands:
     cf:
         permission: chatfilter.command
+        description: "ChatFilter Command"
+
 permissions:
     chatfilter.command:
         default: op
