@@ -38,6 +38,7 @@ class Loader extends PluginBase implements Listener {
     public function onEnable() {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         if (!is_dir($this->getDataFolder())) {
+            mkdir($this->getDataFolder());
             if (!is_file($this->getDataFolder() . "words.txt")) {
                 $this->cfg = new Config($this->getDataFolder() . "words.txt", Config::ENUM);
             }
