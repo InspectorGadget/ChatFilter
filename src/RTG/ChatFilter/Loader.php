@@ -1,7 +1,16 @@
 <?php
 
-/*
- * Copyright (C) 2017 RTG
+/*     
+ * _____                          _             _____           _            _   
+ *|_   _|                        | |           |  __ \         | |          | |  
+ *  | | _ __  ___ _ __   ___  ___| |_ ___  _ __| |  \/ __ _  __| | __ _  ___| |_ 
+ *  | || '_ \/ __| '_ \ / _ \/ __| __/ _ \| '__| | __ / _` |/ _` |/ _` |/ _ \ __|
+ * _| || | | \__ \ |_) |  __/ (__| || (_) | |  | |_\ \ (_| | (_| | (_| |  __/ |_ 
+ * \___/_| |_|___/ .__/ \___|\___|\__\___/|_|   \____/\__,_|\__,_|\__, |\___|\__|
+ *               | |                                               __/ |         
+ *               |_|                                              |___/          
+ *
+ * Copyright (C) 2017 InspectorGadget
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
