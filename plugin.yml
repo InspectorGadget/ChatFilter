@@ -1,14 +1,19 @@
 name: ChatFilter
-version: 1.0.0
-main: RTG\ChatFilter\Loader
-api: ["3.0.0-ALPHA8", "3.0.0-ALPHA9"]
-author: IG
+version: 3.0.0
+main: InspectorGadget\ChatFilter\MainHandler
+api: 3.0.0
+author: InspectorGadget
 
 commands:
-    cf:
-        permission: chatfilter.command
-        description: "ChatFilter Command"
+  cf:
+    permission: chatfilter.command
 
 permissions:
-    chatfilter.command:
-        default: op
+  chatfilter:
+    default: op
+    description: "Chat Filter Root Permission"
+    children:
+      chatfilter.command:
+        description: "Permission for Command"
+      chatfilter.bypass:
+        description: "To bypass the Filter!"
