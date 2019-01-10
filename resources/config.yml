@@ -1,0 +1,18 @@
+---
+# ------------------------------------------
+# All rights reserved InspectorGadget (c)
+# GitHub: https://github.com/InspectorGadget
+# ------------------------------------------
+#
+# Toggle: true or false
+enable: true
+# Caps Limit: Integer
+caps-limit: 4
+# Log Player Swear in Console: true or false
+log-restricted-words: true
+# Replace word with '*'
+replace-word: true
+# Banned Words: Array
+banned-words:
+  - arsefuck
+  - suck
